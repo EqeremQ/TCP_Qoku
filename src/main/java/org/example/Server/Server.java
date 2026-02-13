@@ -27,7 +27,7 @@ public class Server {
         }
     }
 
-    public Socket connetti() {
+    public Socket attendi() {
         try {
             clientSocket = serverSocket.accept();
             System.out.println("Client connesso: " + clientSocket.getInetAddress());

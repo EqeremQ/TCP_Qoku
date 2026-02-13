@@ -5,7 +5,7 @@ public class MainServer {
         Server server = new Server(2000);
 
         while (true) {
-            server.connetti();
+            server.attendi();
             server.leggi();
             server.scrivi();
             server.chiudi();
