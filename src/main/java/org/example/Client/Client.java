@@ -7,7 +7,8 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Client {
+
+public class Client implements Runnable {
     private final String nome;
     private Socket socket;
 
@@ -28,10 +29,9 @@ public class Client {
     public void scrivi() {
         try {
             OutputStream outputStream = socket.getOutputStream();
-            PrintWriter printer = new PrintWriter(outputStream);
+            PrintWriter printer = new PrintWriter(outputStream, true);
 
             printer.print("Ciao\n");
-            printer.flush();
         }
         catch (IOException e) {
             System.err.println("Impossibile scrivere sul server.");
@@ -58,6 +58,13 @@ public class Client {
         catch (IOException e) {
             System.err.println("Impossibile chiudere il socket client.");
         }
+    }
+
+    @Override
+    public void run(){
+        connetti("localhost", 3000);
+        scrivi();
+        chiudi();
     }
 
 }
